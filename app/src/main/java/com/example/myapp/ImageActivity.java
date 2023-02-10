@@ -22,11 +22,11 @@ public class ImageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.image_activity);
 
-        submit.setOnClickListener(new View.OnClickListener() {
-            public void onClick (View view ) {
-                //System.out.println(text.getText().toString());
-            }
-        });
+//        submit.setOnClickListener(new View.OnClickListener() {
+//            public void onClick (View view ) {
+//                //System.out.println(text.getText().toString());
+//            }
+//        });
 
     }
 
