@@ -80,7 +80,7 @@ public class ImageActivity extends AppCompatActivity {
             public void onSuccess(Location location) {
                 if (location != null) {
                     lat = location.getLatitude();
-                    //lon = location.getLongitude();
+                    lon = location.getLongitude();
                 }
             }
         });
