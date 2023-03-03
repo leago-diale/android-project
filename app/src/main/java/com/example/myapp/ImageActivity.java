@@ -85,16 +85,16 @@ public class ImageActivity extends AppCompatActivity {
                         System.out.println("path created");
                     }else{
                         System.out.println("path exists");
-//                        Log.d("path", file.toString());
-//                        FileOutputStream fos = null;
-//                        try {
-//                            fos = new FileOutputStream(file);
-//                            result.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-//                            fos.flush();
-//                            fos.close();
-//                        } catch (java.io.IOException e) {
-//                            e.printStackTrace();
-//                        }
+                        Log.d("path", file.toString());
+                        FileOutputStream fos = null;
+                        try {
+                            fos = new FileOutputStream(file);
+                            result.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                            fos.flush();
+                            fos.close();
+                        } catch (java.io.IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
 
@@ -120,14 +120,18 @@ public class ImageActivity extends AppCompatActivity {
     private  boolean checkAndRequestPermissions() {
 
         int camera = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
-        int storage = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int write = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int read = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
         int tel = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
         int foreground = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
 
         List<String> listPermissionsNeeded = new ArrayList<>();
 
-        if (storage != PackageManager.PERMISSION_GRANTED) {
+        if (write != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add( Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+        if (read != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add( Manifest.permission.READ_EXTERNAL_STORAGE);
         }
         if (tel != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add( Manifest.permission.READ_PHONE_STATE);
@@ -139,10 +143,8 @@ public class ImageActivity extends AppCompatActivity {
             listPermissionsNeeded.add( Manifest.permission.ACCESS_COARSE_LOCATION);
         }
 
-        if (!listPermissionsNeeded.isEmpty())
-        {
-            ActivityCompat.requestPermissions(this,listPermissionsNeeded.toArray
-                    (new String[listPermissionsNeeded.size()]),REQUEST_IMAGE_CAPTURE);
+        if (!listPermissionsNeeded.isEmpty()) {
+            ActivityCompat.requestPermissions(this,listPermissionsNeeded.toArray (new String[listPermissionsNeeded.size()]), REQUEST_IMAGE_CAPTURE);
             return false;
         }
         return true;
