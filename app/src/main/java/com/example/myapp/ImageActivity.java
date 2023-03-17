@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -78,7 +79,7 @@ public class ImageActivity extends AppCompatActivity {
                     text.setError("This field is required");
                     return;
                 }else{
-                    File path = new File(Environment.getExternalStorageDirectory(), "/myFolder");
+                    File path = new File(Environment.getExternalStorageDirectory(), "/DCIM/myFolder");
                     File file = new File (path, text.getText().toString()+".jpg");
                     if (!path.exists()) {
                         path.mkdirs();
@@ -122,7 +123,6 @@ public class ImageActivity extends AppCompatActivity {
         int camera = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
         int write = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         int read = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-        int tel = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
         int foreground = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
 
         List<String> listPermissionsNeeded = new ArrayList<>();
@@ -132,9 +132,6 @@ public class ImageActivity extends AppCompatActivity {
         }
         if (read != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add( Manifest.permission.READ_EXTERNAL_STORAGE);
-        }
-        if (tel != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded.add( Manifest.permission.READ_PHONE_STATE);
         }
         if (camera != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add( Manifest.permission.CAMERA);
